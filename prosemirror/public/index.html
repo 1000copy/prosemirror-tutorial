@@ -1,0 +1,20 @@
+<!DOCTYPE html> <meta charset="utf8" />
+<html>
+<head>
+    <link rel="stylesheet" href="https://prosemirror.net/css/editor.css" />
+</head>
+<body>
+<div id="editor" style="margin-bottom: 23px"></div>
+<script src="ProseMirror.js"></script>
+<script>
+// window.ProseMirror is active by now.
+var plugins = ProseMirror.exampleSetup({ schema: ProseMirror.basicSchema });
+var view = new ProseMirror.EditorView(document.querySelector("#editor"), {
+    state: ProseMirror.EditorState.create({
+        schema: ProseMirror.basicSchema,
+        plugins: plugins
+    })
+});
+</script>
+</body>
+</html>
