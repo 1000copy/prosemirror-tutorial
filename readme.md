@@ -148,5 +148,5 @@ then you will see a `ProseMirror.js` file being created at `public`.
 Open up index.html in a browser and you should see a nice little rich text editor out there!
 
 thank [@vettijoe](https://twitter.com/@vettijoe).
-ref from - 
-http://hexopress.com/@joe/blog/2019/01/07/how-to-install-use-prosemirror-in-your-project
+the article is just one note from [his article](http://hexopress.com/@joe/blog/2019/01/07/how-to-install-use-prosemirror-in-your-project
+)
