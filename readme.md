@@ -10,6 +10,7 @@ For those who are not very patient, please execute the command directly.
 
 	npm install
 	cd prosemirror
+	rollup -c
 	open public/index.html
 
 You should see a nice little rich text editor out there!
