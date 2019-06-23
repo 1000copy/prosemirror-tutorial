@@ -19,7 +19,7 @@ function canInsert(state, nodeType) {
 function insertImageItem(nodeType) {
   return new MenuItem({
     title: "Insert image",
-    label: "Image",
+    label: "IMG",
     enable(state) { return canInsert(state, nodeType) },
     run(state, _, view) {
       let {from, to} = state.selection, attrs = null
@@ -161,6 +161,7 @@ function wrapListItem(nodeType, options) {
 //   : An array of arrays of menu elements for use as the full menu
 //     for, for example the [menu bar](https://github.com/prosemirror/prosemirror-menu#user-content-menubar).
 export function buildMenuItems(schema) {
+  console.log(schema)
   let r = {}, type
   if (type = schema.marks.strong)
     r.toggleStrong = markItem(type, {title: "Toggle strong 💪really style", icon: icons.strong})
@@ -202,29 +203,30 @@ export function buildMenuItems(schema) {
     for (let i = 1; i <= 10; i++)
       r["makeHead" + i] = blockTypeItem(type, {
         title: "Change to heading " + i,
-        label: "Level " + i,
+        label: "H" + i,
         attrs: {level: i}
       })
   if (type = schema.nodes.horizontal_rule) {
     let hr = type
     r.insertHorizontalRule = new MenuItem({
       title: "Insert horizontal rule",
-      label: "Horizontal rule",
+      label: "HR",
       enable(state) { return canInsert(state, hr) },
       run(state, dispatch) { dispatch(state.tr.replaceSelectionWith(hr.create())) }
     })
   }
 
   let cut = arr => arr.filter(x => x)
-  r.insertMenu = new Dropdown(cut([r.insertImage, r.insertHorizontalRule]), {label: "Insert"})
+  // r.insertMenu = new Dropdown(cut([r.insertImage, r.insertHorizontalRule]), {label: "Insert"})
   r.typeMenu = new Dropdown(cut([r.makeParagraph, r.makeCodeBlock, r.makeHead1 && new DropdownSubmenu(cut([
-    r.makeHead1, r.makeHead2, r.makeHead3, r.makeHead4, r.makeHead5, r.makeHead6
-  ]), {label: "Heading"})]), {label: "Type..."})
+     r.makeHead4, r.makeHead5, r.makeHead6
+  ]), {label: "Heading"})]), {label: "Type"})
 
-  r.inlineMenu = [cut([r.toggleStrong, r.toggleEm, r.toggleCode, r.toggleLink])]
+  var rinlineMenu = [cut([r.makeHead1,r.makeHead2,r.makeHead3,r.toggleStrong, r.toggleEm, r.toggleCode, r.toggleLink,
+      r.insertImage, r.insertHorizontalRule])]
   r.blockMenu = [cut([r.wrapBulletList, r.wrapOrderedList, r.wrapBlockQuote, joinUpItem,
                       liftItem, selectParentNodeItem])]
-  r.fullMenu = r.inlineMenu.concat([[r.insertMenu, r.typeMenu]], [[undoItem, redoItem]], r.blockMenu)
+  r.fullMenu = rinlineMenu.concat([[ r.typeMenu]], [[undoItem, redoItem]], r.blockMenu)
 
   return r
 }

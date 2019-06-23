@@ -4,17 +4,11 @@
     <link rel="stylesheet" href="https://prosemirror.net/css/editor.css" />
 </head>
 <body>
-<div id="editor" style="margin-bottom: 23px"></div>
+<div id="editor" style="margin: 30px "></div>
 <script src="ProseMirror.js"></script>
 <script>
 // window.ProseMirror is active by now.
-var plugins = ProseMirror.exampleSetup({ schema: ProseMirror.basicSchema });
-var view = new ProseMirror.EditorView(document.querySelector("#editor"), {
-    state: ProseMirror.EditorState.create({
-        schema: ProseMirror.basicSchema,
-        plugins: plugins
-    })
-});
+ProseMirror.bind(document.querySelector("#editor"))
 </script>
 </body>
 </html>

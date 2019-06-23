@@ -15157,22 +15157,14 @@ var ProseMirror = (function (exports) {
 	var dist_5$3 = dist$3.__parseFromClipboard;
 	var dist_6$3 = dist$3.__endComposition;
 
-	var schemaBasic = createCommonjsModule(function (module, exports) {
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-
-
-	var pDOM = ["p", 0];
-	var blockquoteDOM = ["blockquote", 0];
-	var hrDOM = ["hr"];
-	var preDOM = ["pre", ["code", 0]];
-	var brDOM = ["br"]; // :: Object
+	const pDOM = ["p", 0],
+	      blockquoteDOM = ["blockquote", 0],
+	      hrDOM = ["hr"],
+	      preDOM = ["pre", ["code", 0]],
+	      brDOM = ["br"]; // :: Object
 	// [Specs](#model.NodeSpec) for the nodes defined in this schema.
 
-	var nodes = {
+	const nodes = {
 	  // :: NodeSpec The top level document node.
 	  doc: {
 	    content: "block+"
@@ -15185,9 +15177,11 @@ var ProseMirror = (function (exports) {
 	    parseDOM: [{
 	      tag: "p"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return pDOM;
 	    }
+
 	  },
 	  // :: NodeSpec A blockquote (`<blockquote>`) wrapping one or more blocks.
 	  blockquote: {
@@ -15197,9 +15191,11 @@ var ProseMirror = (function (exports) {
 	    parseDOM: [{
 	      tag: "blockquote"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return blockquoteDOM;
 	    }
+
 	  },
 	  // :: NodeSpec A horizontal rule (`<hr>`).
 	  horizontal_rule: {
@@ -15207,9 +15203,11 @@ var ProseMirror = (function (exports) {
 	    parseDOM: [{
 	      tag: "hr"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return hrDOM;
 	    }
+
 	  },
 	  // :: NodeSpec A heading textblock, with a `level` attribute that
 	  // should hold the number 1 to 6. Parsed and serialized as `<h1>` to
@@ -15254,9 +15252,11 @@ var ProseMirror = (function (exports) {
 	        level: 6
 	      }
 	    }],
-	    toDOM: function toDOM(node) {
+
+	    toDOM(node) {
 	      return ["h" + node.attrs.level, 0];
 	    }
+
 	  },
 	  // :: NodeSpec A code listing. Disallows marks or non-text inline
 	  // nodes by default. Represented as a `<pre>` element with a
@@ -15271,9 +15271,11 @@ var ProseMirror = (function (exports) {
 	      tag: "pre",
 	      preserveWhitespace: "full"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return preDOM;
 	    }
+
 	  },
 	  // :: NodeSpec The text node.
 	  text: {
@@ -15297,25 +15299,30 @@ var ProseMirror = (function (exports) {
 	    draggable: true,
 	    parseDOM: [{
 	      tag: "img[src]",
-	      getAttrs: function getAttrs(dom) {
+
+	      getAttrs(dom) {
 	        return {
 	          src: dom.getAttribute("src"),
 	          title: dom.getAttribute("title"),
 	          alt: dom.getAttribute("alt")
 	        };
 	      }
+
 	    }],
-	    toDOM: function toDOM(node) {
-	      var ref = node.attrs;
-	      var src = ref.src;
-	      var alt = ref.alt;
-	      var title = ref.title;
+
+	    toDOM(node) {
+	      let {
+	        src,
+	        alt,
+	        title
+	      } = node.attrs;
 	      return ["img", {
-	        src: src,
-	        alt: alt,
-	        title: title
+	        src,
+	        alt,
+	        title
 	      }];
 	    }
+
 	  },
 	  // :: NodeSpec A hard line break, represented in the DOM as `<br>`.
 	  hard_break: {
@@ -15325,16 +15332,18 @@ var ProseMirror = (function (exports) {
 	    parseDOM: [{
 	      tag: "br"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return brDOM;
 	    }
+
 	  }
 	};
-	var emDOM = ["em", 0];
-	var strongDOM = ["strong", 0];
-	var codeDOM = ["code", 0]; // :: Object [Specs](#model.MarkSpec) for the marks in the schema.
+	const emDOM = ["em", 0],
+	      strongDOM = ["strong", 0],
+	      codeDOM = ["code", 0]; // :: Object [Specs](#model.MarkSpec) for the marks in the schema.
 
-	var marks = {
+	const marks = {
 	  // :: MarkSpec A link. Has `href` and `title` attributes. `title`
 	  // defaults to the empty string. Rendered and parsed as an `<a>`
 	  // element.
@@ -15348,22 +15357,27 @@ var ProseMirror = (function (exports) {
 	    inclusive: false,
 	    parseDOM: [{
 	      tag: "a[href]",
-	      getAttrs: function getAttrs(dom) {
+
+	      getAttrs(dom) {
 	        return {
 	          href: dom.getAttribute("href"),
 	          title: dom.getAttribute("title")
 	        };
 	      }
+
 	    }],
-	    toDOM: function toDOM(node) {
-	      var ref = node.attrs;
-	      var href = ref.href;
-	      var title = ref.title;
+
+	    toDOM(node) {
+	      let {
+	        href,
+	        title
+	      } = node.attrs;
 	      return ["a", {
-	        href: href,
-	        title: title
+	        href,
+	        title
 	      }, 0];
 	    }
+
 	  },
 	  // :: MarkSpec An emphasis mark. Rendered as an `<em>` element.
 	  // Has parse rules that also match `<i>` and `font-style: italic`.
@@ -15375,9 +15389,11 @@ var ProseMirror = (function (exports) {
 	    }, {
 	      style: "font-style=italic"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return emDOM;
 	    }
+
 	  },
 	  // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
 	  // also match `<b>` and `font-weight: bold`.
@@ -15389,50 +15405,41 @@ var ProseMirror = (function (exports) {
 	    // tags with a font-weight normal.
 	    {
 	      tag: "b",
-	      getAttrs: function (node) {
-	        return node.style.fontWeight != "normal" && null;
-	      }
+	      getAttrs: node => node.style.fontWeight != "normal" && null
 	    }, {
 	      style: "font-weight",
-	      getAttrs: function (value) {
-	        return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null;
-	      }
+	      getAttrs: value => /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return strongDOM;
 	    }
+
 	  },
 	  // :: MarkSpec Code font mark. Represented as a `<code>` element.
 	  code: {
 	    parseDOM: [{
 	      tag: "code"
 	    }],
-	    toDOM: function toDOM() {
+
+	    toDOM() {
 	      return codeDOM;
 	    }
-	  }
-	}; // :: Schema
-	// This schema rougly corresponds to the document schema used by
-	// [CommonMark](http://commonmark.org/), minus the list elements,
-	// which are defined in the [`prosemirror-schema-list`](#schema-list)
-	// module.
-	//
-	// To reuse elements from this schema, extend or read from its
-	// `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
 
-	var schema = new dist.Schema({
-	  nodes: nodes,
-	  marks: marks
-	});
-	exports.nodes = nodes;
-	exports.marks = marks;
-	exports.schema = schema;
-	});
+	  } // :: Schema
+	  // This schema rougly corresponds to the document schema used by
+	  // [CommonMark](http://commonmark.org/), minus the list elements,
+	  // which are defined in the [`prosemirror-schema-list`](#schema-list)
+	  // module.
+	  //
+	  // To reuse elements from this schema, extend or read from its
+	  // `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
 
-	unwrapExports(schemaBasic);
-	var schemaBasic_1 = schemaBasic.nodes;
-	var schemaBasic_2 = schemaBasic.marks;
-	var schemaBasic_3 = schemaBasic.schema;
+	};
+	const schema = new dist_8({
+	  nodes,
+	  marks
+	});
 
 	var base = {
 	  8: "Backspace",
@@ -19619,7 +19626,7 @@ var ProseMirror = (function (exports) {
 	function insertImageItem(nodeType) {
 	  return new dist_1$5({
 	    title: "Insert image",
-	    label: "Image",
+	    label: "IMG",
 
 	    enable(state) {
 	      return canInsert(state, nodeType);
@@ -19802,6 +19809,7 @@ var ProseMirror = (function (exports) {
 
 
 	function buildMenuItems(schema) {
+	  console.log(schema);
 	  let r = {},
 	      type;
 	  if (type = schema.marks.strong) r.toggleStrong = markItem(type, {
@@ -19840,7 +19848,7 @@ var ProseMirror = (function (exports) {
 	  });
 	  if (type = schema.nodes.heading) for (let i = 1; i <= 10; i++) r["makeHead" + i] = dist_12$2(type, {
 	    title: "Change to heading " + i,
-	    label: "Level " + i,
+	    label: "H" + i,
 	    attrs: {
 	      level: i
 	    }
@@ -19850,7 +19858,7 @@ var ProseMirror = (function (exports) {
 	    let hr = type;
 	    r.insertHorizontalRule = new dist_1$5({
 	      title: "Insert horizontal rule",
-	      label: "Horizontal rule",
+	      label: "HR",
 
 	      enable(state) {
 	        return canInsert(state, hr);
@@ -19863,19 +19871,17 @@ var ProseMirror = (function (exports) {
 	    });
 	  }
 
-	  let cut = arr => arr.filter(x => x);
+	  let cut = arr => arr.filter(x => x); // r.insertMenu = new Dropdown(cut([r.insertImage, r.insertHorizontalRule]), {label: "Insert"})
 
-	  r.insertMenu = new dist_2$5(cut([r.insertImage, r.insertHorizontalRule]), {
-	    label: "Insert"
-	  });
-	  r.typeMenu = new dist_2$5(cut([r.makeParagraph, r.makeCodeBlock, r.makeHead1 && new dist_3$4(cut([r.makeHead1, r.makeHead2, r.makeHead3, r.makeHead4, r.makeHead5, r.makeHead6]), {
+
+	  r.typeMenu = new dist_2$5(cut([r.makeParagraph, r.makeCodeBlock, r.makeHead1 && new dist_3$4(cut([r.makeHead4, r.makeHead5, r.makeHead6]), {
 	    label: "Heading"
 	  })]), {
-	    label: "Type..."
+	    label: "Type"
 	  });
-	  r.inlineMenu = [cut([r.toggleStrong, r.toggleEm, r.toggleCode, r.toggleLink])];
+	  var rinlineMenu = [cut([r.makeHead1, r.makeHead2, r.makeHead3, r.toggleStrong, r.toggleEm, r.toggleCode, r.toggleLink, r.insertImage, r.insertHorizontalRule])];
 	  r.blockMenu = [cut([r.wrapBulletList, r.wrapOrderedList, r.wrapBlockQuote, dist_6$4, dist_7$3, dist_8$3])];
-	  r.fullMenu = r.inlineMenu.concat([[r.insertMenu, r.typeMenu]], [[dist_9$3, dist_10$2]], r.blockMenu);
+	  r.fullMenu = rinlineMenu.concat([[r.typeMenu]], [[dist_9$3, dist_10$2]], r.blockMenu);
 	  return r;
 	}
 
@@ -20323,13 +20329,21 @@ var ProseMirror = (function (exports) {
 	  }));
 	}
 
+	function bind(elem) {
+	  var view = new dist_1$3(elem, {
+	    state: dist_7$2.create({
+	      schema: schema,
+	      plugins: exampleSetup({
+	        schema: schema
+	      })
+	    })
+	  });
+	}
+
 	exports.DOMParser = dist_12;
-	exports.EditorState = dist_7$2;
-	exports.EditorView = dist_1$3;
 	exports.Node = dist_1;
 	exports.Schema = dist_8;
-	exports.basicSchema = schemaBasic_3;
-	exports.exampleSetup = exampleSetup;
+	exports.bind = bind;
 
 	return exports;
 
