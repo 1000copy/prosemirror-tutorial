@@ -8,7 +8,8 @@
 <script src="ProseMirror.js"></script>
 <script>
 // window.ProseMirror is active by now.
-ProseMirror.bind(document.querySelector("#editor"))
+var view = ProseMirror.bind(document.querySelector("#editor"))
+// console.log(view,view.state.doc.content.getHTML())
 </script>
 </body>
 </html>

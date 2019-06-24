@@ -12,4 +12,5 @@ export function bind(elem){
             plugins: exampleSetup({ schema: basicSchema })
         })
     });
+    return view
 }
