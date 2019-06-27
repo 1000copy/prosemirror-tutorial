@@ -11,6 +11,9 @@ export function bind(elem){
             schema: basicSchema,
             plugins: exampleSetup({ schema: basicSchema })
         })
+        ,
+        handleDoubleClick(){console.log(42)},
+        handleKeyPress(){console.log(42)},
     });
     return view
 }

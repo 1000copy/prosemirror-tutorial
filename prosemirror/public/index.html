@@ -9,7 +9,13 @@
 <script>
 // window.ProseMirror is active by now.
 var view = ProseMirror.bind(document.querySelector("#editor"))
-// console.log(view,view.state.doc.content.getHTML())
+view.dom.innerText = "hello<b>prosemirror</b>"
+view.dom.innerHTML = "hello<b>prosemirror</b>"
+console.log(view)
+// console.log(view.dom.innerText,view.dom.innerHTML)
+view.state.onUpdate = ()=>{
+    console.log(view.innerText)
+}
 </script>
 </body>
 </html>

@@ -19678,6 +19678,11 @@ var ProseMirror = (function (exports) {
 	    path: "M7.51,6.247a2.25,2.25 0 1,0 4.5,0a2.25,2.25 0 1,0 -4.5,0M16.916,8.71A1.027,1.027,0,0,0,16,8.158a1.007,1.007,0,0,0-.892.586L13.55,12.178a.249.249,0,0,1-.422.053l-.82-1.024a1,1,0,0,0-.813-.376,1.007,1.007,0,0,0-.787.426L7.59,15.71A.5.5,0,0,0,8,16.5H20a.5.5,0,0,0,.425-.237.5.5,0,0,0,.022-.486ZM22,0H5.5a2,2,0,0,0-2,2V18.5a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V2A2,2,0,0,0,22,0Zm-.145,18.354a.5.5,0,0,1-.354.146H6a.5.5,0,0,1-.5-.5V2.5A.5.5,0,0,1,6,2H21.5a.5.5,0,0,1,.5.5V18A.5.5,0,0,1,21.855,18.351ZM19.5,22H2.5a.5.5,0,0,1-.5-.5V4.5a1,1,0,0,0-2,0V22a2,2,0,0,0,2,2H19.5a1,1,0,0,0,0-2Z" // path: "M0 448v256h256v-256h-128c0 0 0-128 128-128v-128c0 0-256 0-256 256zM640 320v-128c0 0-256 0-256 256v256h256v-256h-128c0 0 0-128 128-128z"
 	    // path:"M5,13 C4.44771525,13 4,12.5522847 4,12 C4,11.4477153 4.44771525,11 5,11 L19,11 C19.5522847,11 20,11.4477153 20,12 C20,12.5522847 19.5522847,13 19,13 L5,13 Z"
 
+	  },
+	  hr: {
+	    width: 24,
+	    height: 24,
+	    path: "M5,13 C4.44771525,13 4,12.5522847 4,12 C4,11.4477153 4.44771525,11 5,11 L19,11 C19.5522847,11 20,11.4477153 20,12 C20,12.5522847 19.5522847,13 19,13 L5,13 Z"
 	  }
 	};
 
@@ -19929,6 +19934,7 @@ var ProseMirror = (function (exports) {
 	    r.insertHorizontalRule = new dist_1$5({
 	      title: "Insert horizontal rule",
 	      label: "HR",
+	      icon: icons.hr,
 
 	      enable(state) {
 	        return canInsert(state, hr);
@@ -19947,11 +19953,13 @@ var ProseMirror = (function (exports) {
 	  r.typeMenu = new dist_2$5(cut([r.makeParagraph, r.makeCodeBlock, r.makeHead1 && new dist_3$4(cut([r.makeHead4, r.makeHead5, r.makeHead6]), {
 	    label: "Heading"
 	  })]), {
-	    label: "Type"
+	    label: "$",
+	    icon: icons.strong,
+	    title: "Type menus"
 	  });
 	  var rinlineMenu = [cut([r.makeHead1, r.makeHead2, r.makeHead3, r.toggleStrong, r.toggleEm, r.toggleCode, r.toggleLink, r.insertImage, r.insertHorizontalRule])];
 	  r.blockMenu = [cut([r.wrapBulletList, r.wrapOrderedList, r.wrapBlockQuote, dist_6$4, dist_7$3, dist_8$3])];
-	  r.fullMenu = rinlineMenu.concat([[r.typeMenu]], [[dist_9$3, dist_10$2]], r.blockMenu);
+	  r.fullMenu = rinlineMenu.concat([[dist_9$3, dist_10$2]], r.blockMenu, [[r.typeMenu]]);
 	  return r;
 	}
 
@@ -20411,7 +20419,16 @@ var ProseMirror = (function (exports) {
 	      plugins: exampleSetup({
 	        schema: schema
 	      })
-	    })
+	    }),
+
+	    handleDoubleClick() {
+	      console.log(42);
+	    },
+
+	    handleKeyPress() {
+	      console.log(42);
+	    }
+
 	  });
 	  return view;
 	}
